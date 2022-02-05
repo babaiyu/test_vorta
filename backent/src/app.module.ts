@@ -4,6 +4,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersEntity } from './users/users.entity';
 import { UsersModule } from './users/users.module';
+import { TreatmentsModule } from './treatments/treatments.module';
+import { TreatmentsEntity } from './treatments/treatments.entity';
+import { LocationsModule } from './locations/locations.module';
+import { LocationsEntity } from './locations/locations.entity';
+
 import env from './env';
 
 @Module({
@@ -15,9 +20,11 @@ import env from './env';
       username: env.USERNAME,
       password: env.PASSWORD,
       database: env.DATABASE,
-      entities: [UsersEntity],
+      entities: [UsersEntity, TreatmentsEntity, LocationsEntity],
     }),
     UsersModule,
+    TreatmentsModule,
+    LocationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
