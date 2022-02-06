@@ -8,8 +8,17 @@ import { TreatmentsModule } from './treatments/treatments.module';
 import { TreatmentsEntity } from './treatments/treatments.entity';
 import { LocationsModule } from './locations/locations.module';
 import { LocationsEntity } from './locations/locations.entity';
+import { PatientsModule } from './patients/patients.module';
+import { PatientsEntity } from './patients/patients.entity';
 
 import env from './env';
+
+const entities = [
+  UsersEntity,
+  TreatmentsEntity,
+  LocationsEntity,
+  PatientsEntity,
+];
 
 @Module({
   imports: [
@@ -20,11 +29,12 @@ import env from './env';
       username: env.USERNAME,
       password: env.PASSWORD,
       database: env.DATABASE,
-      entities: [UsersEntity, TreatmentsEntity, LocationsEntity],
+      entities,
     }),
     UsersModule,
     TreatmentsModule,
     LocationsModule,
+    PatientsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
