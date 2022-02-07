@@ -45,4 +45,17 @@ export class PatientsService {
     await this.patientsRepository.save(patient);
     return patient;
   }
+
+  async changeStatus(id: number, isActive: boolean): Promise<PatientsEntity> {
+    let data = await this.patientsRepository.findOne({ where: { id } });
+    data.is_active = isActive;
+    await this.patientsRepository.update({ id }, data);
+
+    return data;
+  }
+
+  async update(id: number, data: Partial<PatientsDTO>) {
+    await this.patientsRepository.update({ id }, data);
+    return await this.patientsRepository.findOne({ where: { id } });
+  }
 }

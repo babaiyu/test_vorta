@@ -1,4 +1,13 @@
-import { Body, Controller, Get, HttpStatus, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpStatus,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { PatientsDTO } from './patients.dto';
 import { PatientsService } from './patients.service';
 
@@ -16,18 +25,8 @@ export class PatientsController {
     };
   }
 
-  // @Get(':id')
-  // async showById(@Param('id') id: number) {
-  //   const patient = await this.patientsService.showByID(id);
-  //   return {
-  //     statusCode: HttpStatus.OK,
-  //     message: '',
-  //     patient,
-  //   };
-  // }
-
-  @Get(':name')
-  async showByName(@Param('name') name: string) {
+  @Get('getByName')
+  async showByName(@Query('name') name: string) {
     const patient = await this.patientsService.showByName(name);
     return {
       statusCode: HttpStatus.OK,
@@ -42,6 +41,32 @@ export class PatientsController {
     return {
       statusCode: HttpStatus.OK,
       message: 'Patient added successfully',
+      patient,
+    };
+  }
+
+  @Patch('changeStatus/:id')
+  async changeStatus(
+    @Param('id') id: number,
+    @Query('isActive') isActive: boolean,
+  ) {
+    const patient = await this.patientsService.changeStatus(id, isActive);
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Patient change status is successfully',
+      patient,
+    };
+  }
+
+  @Patch(':id')
+  async updatePatient(
+    @Param('id') id: number,
+    @Body() data: Partial<PatientsDTO>,
+  ) {
+    const patient = await this.patientsService.update(id, data);
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Patient updated successfully',
       patient,
     };
   }
