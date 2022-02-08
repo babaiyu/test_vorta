@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersEntity } from './users/users.entity';
-import { UsersModule } from './users/users.module';
 import { TreatmentsModule } from './treatments/treatments.module';
 import { TreatmentsEntity } from './treatments/treatments.entity';
 import { LocationsModule } from './locations/locations.module';
@@ -13,12 +11,7 @@ import { PatientsEntity } from './patients/patients.entity';
 
 import env from './env';
 
-const entities = [
-  UsersEntity,
-  TreatmentsEntity,
-  LocationsEntity,
-  PatientsEntity,
-];
+const entities = [TreatmentsEntity, LocationsEntity, PatientsEntity];
 
 @Module({
   imports: [
@@ -31,7 +24,6 @@ const entities = [
       database: env.DATABASE,
       entities,
     }),
-    UsersModule,
     TreatmentsModule,
     LocationsModule,
     PatientsModule,
