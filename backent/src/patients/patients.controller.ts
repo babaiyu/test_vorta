@@ -48,9 +48,9 @@ export class PatientsController {
   @Patch('changeStatus/:id')
   async changeStatus(
     @Param('id') id: number,
-    @Query('isActive') isActive: boolean,
+    @Body() data: { isActive: boolean },
   ) {
-    const patient = await this.patientsService.changeStatus(id, isActive);
+    const patient = await this.patientsService.changeStatus(id, data.isActive);
     return {
       statusCode: HttpStatus.OK,
       message: 'Patient change status is successfully',
