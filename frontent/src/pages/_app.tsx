@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider>
       <Head>
-        <title>Test Vorat - Bayu Permana Putra</title>
+        <title>Test Vorta - Bayu Permana Putra</title>
       </Head>
       <Component {...pageProps} />
     </ChakraProvider>
