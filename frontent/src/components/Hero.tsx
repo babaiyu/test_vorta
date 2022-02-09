@@ -7,8 +7,13 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
+import React from "react";
 
-export default function Hero() {
+interface Props {
+  onAddPatient: () => void;
+}
+
+export default function Hero({ onAddPatient }: Props) {
   return (
     <>
       <Box px={4}>
@@ -27,7 +32,11 @@ export default function Hero() {
               >
                 Non-Aktifkan
               </Button>
-              <Button colorScheme="teal" leftIcon={<AddIcon />}>
+              <Button
+                colorScheme="teal"
+                leftIcon={<AddIcon />}
+                onClick={onAddPatient}
+              >
                 Tambah Pasien
               </Button>
             </Box>

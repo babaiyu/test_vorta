@@ -58,4 +58,9 @@ export class PatientsService {
     await this.patientsRepository.update({ id }, data);
     return await this.patientsRepository.findOne({ where: { id } });
   }
+
+  async delete(id: number) {
+    await this.patientsRepository.delete({ id });
+    return { deleted: true };
+  }
 }

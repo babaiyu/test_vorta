@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   HttpStatus,
   Param,
@@ -68,6 +69,15 @@ export class PatientsController {
       statusCode: HttpStatus.OK,
       message: 'Patient updated successfully',
       patient,
+    };
+  }
+
+  @Delete(':id')
+  async deletePatient(@Param('id') id: number) {
+    await this.patientsService.delete(id);
+    return {
+      statusCode: 200,
+      message: 'Patient deleted successfully',
     };
   }
 }
