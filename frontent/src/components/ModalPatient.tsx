@@ -1,5 +1,7 @@
 import { CheckIcon, CloseIcon } from "@chakra-ui/icons";
 import {
+  Alert,
+  AlertIcon,
   Button,
   Flex,
   FormControl,
@@ -24,12 +26,15 @@ import itemHook from "../hooks/itemHook";
 import "react-calendar/dist/Calendar.css";
 import ItemTime from "./ItemTime";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 
 interface Props {
   onClose: () => void;
   isOpen: boolean;
   title: string;
   onSave: (v: any) => void;
+  dataEdit?: any;
+  type: "add" | "update" | "update_full" | "";
 }
 
 const schema = yup.object({
@@ -52,6 +57,8 @@ export default function ModalPatient({
   isOpen,
   title,
   onSave,
+  dataEdit,
+  type,
 }: Props) {
   const {
     handleSubmit,
@@ -64,7 +71,7 @@ export default function ModalPatient({
   } = useForm({ resolver: yupResolver(schema) });
   const { treatments, locations } = itemHook();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = (data: any) => {
     const getTime = data?.time_start.split(".");
     const timeEnd =
       getTime[1] === "00" ? `${getTime[0]}.30` : `${+getTime[0] + 1}.00`;
@@ -83,12 +90,26 @@ export default function ModalPatient({
     };
 
     console.log("Payload => ", payload);
-    await onSave(payload);
+    onSave(payload);
   };
 
   const _onClose = () => {
     Promise.all([reset()]).then(() => onClose());
   };
+
+  const onGetDataEdit = () => {
+    setValue("name", dataEdit?.name || "");
+    setValue("phoneNumber", dataEdit?.phone_number || "");
+    setValue("isActive", dataEdit?.is_active ? "1" : "0");
+    setValue("treatmentId", String(dataEdit?.treatmentId || ""));
+    setValue("locationId", String(dataEdit?.locationId || ""));
+    setValue("date", dayjs(dataEdit?.date).toDate() || "");
+    setValue("time_start", dataEdit?.time_start || "");
+  };
+
+  useEffect(() => {
+    onGetDataEdit();
+  }, [dataEdit]);
 
   return (
     <Modal onClose={_onClose} isOpen={isOpen}>
@@ -98,9 +119,19 @@ export default function ModalPatient({
           <ModalHeader>{title}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            {/* ONLY WHEN EDITING */}
+            {dataEdit && (
+              <Alert>
+                <AlertIcon />
+                Masukkan informasi {type === "update" &&
+                  "jadwal appointment"}{" "}
+                baru untuk pasien, {dataEdit?.name}
+              </Alert>
+            )}
+
             {/* FORMS */}
             {/* Name */}
-            <FormControl isInvalid={errors?.name}>
+            <FormControl hidden={type === "update"} isInvalid={errors?.name}>
               <FormLabel htmlFor="name">Nama</FormLabel>
               <Input
                 id="name"
@@ -114,7 +145,10 @@ export default function ModalPatient({
             </FormControl>
 
             {/* Phone Number */}
-            <FormControl isInvalid={errors?.phoneNumber}>
+            <FormControl
+              hidden={type === "update"}
+              isInvalid={errors?.phoneNumber}
+            >
               <FormLabel htmlFor="phoneNumber">Nomor Telepon</FormLabel>
               <Input
                 id="phoneNumber"
@@ -128,7 +162,10 @@ export default function ModalPatient({
             </FormControl>
 
             {/* Is Active */}
-            <FormControl isInvalid={errors?.isActive}>
+            <FormControl
+              hidden={type === "update"}
+              isInvalid={errors?.isActive}
+            >
               <FormLabel htmlFor="isActive">Status</FormLabel>
               <Select
                 id="isActive"
@@ -225,7 +262,7 @@ export default function ModalPatient({
               Batal
             </Button>
             <Button type="submit" colorScheme="blue" leftIcon={<CheckIcon />}>
-              Simpan
+              {dataEdit ? "Ubah" : "Simpan"}
             </Button>
           </ModalFooter>
         </ModalContent>
