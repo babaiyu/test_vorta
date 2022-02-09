@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Feb 08, 2022 at 03:36 AM
+-- Generation Time: Feb 09, 2022 at 11:44 PM
 -- Server version: 5.7.34
 -- PHP Version: 7.4.21
 
@@ -68,8 +68,8 @@ CREATE TABLE `patients` (
 --
 
 INSERT INTO `patients` (`id`, `name`, `id_number`, `phone_number`, `is_active`, `treatmentId`, `locationId`, `date`, `time_start`, `time_end`, `create_date`, `update_date`) VALUES
-(1, 'Mas Mamank', '', '', 1, 1, 1, '2022-02-05', '14.30', '15.30', '2022-02-06 04:26:41', '2022-02-06 04:26:41'),
-(2, 'Mas GantengBanget', '1644115124485', '085801874452', 0, 2, 2, '2022-02-05', '14.30', '15.30', '2022-02-06 04:26:41', '2022-02-06 04:26:41');
+(4, 'Suprat Man', '1644375617655', '+6285694946173', 0, 1, 1, '2022-02-11', '12.30', '13.00', '2022-02-09 21:33:27', '2022-02-09 21:33:27'),
+(5, 'Mamank', '1644420128767', '0821327243', 1, 2, 1, '2022-02-18', '15.30', '16.00', '2022-02-10 06:40:56', '2022-02-10 06:40:56');
 
 -- --------------------------------------------------------
 
@@ -148,7 +148,7 @@ ALTER TABLE `locations`
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `treatments`
