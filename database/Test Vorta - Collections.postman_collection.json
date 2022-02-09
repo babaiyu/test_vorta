@@ -243,6 +243,26 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Delete Patients",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3500/patients/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3500",
+							"path": [
+								"patients",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
