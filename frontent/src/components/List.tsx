@@ -4,6 +4,7 @@ import {
   ChevronDownIcon,
   ChevronUpIcon,
   CloseIcon,
+  DeleteIcon,
   StarIcon,
   SunIcon,
 } from "@chakra-ui/icons";
@@ -31,9 +32,18 @@ import dayjs from "dayjs";
 interface Props {
   data: any[];
   onChangeStatus: (id: number, status: boolean) => void;
+  onChangeAppointment: (data: any) => void;
+  onUpdate: (data: any) => void;
+  onDelete: (data: any) => void;
 }
 
-export default function List({ data, onChangeStatus }: Props) {
+export default function List({
+  data,
+  onChangeStatus,
+  onChangeAppointment,
+  onUpdate,
+  onDelete,
+}: Props) {
   return (
     <>
       <Container maxW="6xl" mt="5">
@@ -91,7 +101,10 @@ export default function List({ data, onChangeStatus }: Props) {
                               {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
                             </MenuButton>
                             <MenuList>
-                              <MenuItem icon={<CalendarIcon />}>
+                              <MenuItem
+                                onClick={() => onChangeAppointment(item)}
+                                icon={<CalendarIcon />}
+                              >
                                 Ubah Appointment
                               </MenuItem>
                               {item?.is_active ? (
@@ -111,7 +124,18 @@ export default function List({ data, onChangeStatus }: Props) {
                                   Aktifkan
                                 </MenuItem>
                               )}
-                              <MenuItem icon={<SunIcon />}>Ubah Data</MenuItem>
+                              <MenuItem
+                                onClick={() => onUpdate(item)}
+                                icon={<SunIcon />}
+                              >
+                                Ubah Data
+                              </MenuItem>
+                              <MenuItem
+                                onClick={() => onDelete(item)}
+                                icon={<DeleteIcon />}
+                              >
+                                Hapus
+                              </MenuItem>
                             </MenuList>
                           </>
                         )}
