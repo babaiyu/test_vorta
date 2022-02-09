@@ -5,6 +5,7 @@ This project is created for my application to Vorta Siber Indonesia
 #### Frontend
 - NextJS
 - Chakra UI
+- React Hook Form
 
 #### Backend
 - NestJS
@@ -26,10 +27,10 @@ $ yarn dev
 #### Frontend
 - View Patients
 - Change Status Patients
+- CRUD Operations for Patients
 
 ### Backend
 - Show, Add Treatments
 - Show, Add Locations
 - Show All, getByName, add, changeStatus, update Patients
-
-> Note: I'm sorry i can't finish this project before deadline. Since i have more other schedule so i don't have much time to finish it.
+- CRUD api for patients
