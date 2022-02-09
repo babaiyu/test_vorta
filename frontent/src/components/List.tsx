@@ -121,58 +121,6 @@ export default function List({ data, onChangeStatus }: Props) {
                 </Td>
               </Tr>
             ))}
-            {/* <Tr>
-              <Td>
-                <Checkbox />
-              </Td>
-              <Td>
-                <Box>
-                  <b>Pasien A</b>
-                  <br />
-                  <small>Aktif</small>
-                </Box>
-              </Td>
-              <Td>123456789</Td>
-              <Td>123456789</Td>
-              <Td>-</Td>
-              <Td>
-                <Flex>
-                  <Box>
-                    <Stack>
-                      <p>
-                        <StarIcon /> Eyelash Variant 1
-                      </p>
-                    </Stack>
-                    <Stack>
-                      <p>
-                        <CalendarIcon /> Rabu, 21 Jan 2021: 14.30 - 15.30
-                      </p>
-                    </Stack>
-                  </Box>
-                  <Spacer />
-                  <Box>
-                    <Menu>
-                      {({ isOpen }) => (
-                        <>
-                          <MenuButton isActive={isOpen} as={Button}>
-                            {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
-                          </MenuButton>
-                          <MenuList>
-                            <MenuItem icon={<CalendarIcon />}>
-                              Ubah Appointment
-                            </MenuItem>
-                            <MenuItem icon={<CloseIcon />}>
-                              Non-Aktifkan
-                            </MenuItem>
-                            <MenuItem icon={<SunIcon />}>Ubah Data</MenuItem>
-                          </MenuList>
-                        </>
-                      )}
-                    </Menu>
-                  </Box>
-                </Flex>
-              </Td>
-            </Tr> */}
           </Tbody>
         </Table>
       </Container>
