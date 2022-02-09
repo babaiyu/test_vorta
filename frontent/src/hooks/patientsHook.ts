@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { changePatientStatus, getPatients } from "../services/api";
+import { addPatient, changePatientStatus, getPatients } from "../services/api";
 
 export default function patientsHook() {
   const [patients, setPatients] = useState([]);
@@ -22,9 +22,20 @@ export default function patientsHook() {
     }
   };
 
+  const _addPatient = async (value: any) => {
+    try {
+      const result = await addPatient(value);
+      if (result.data) await onGetPatients();
+      return true;
+    } catch (error) {
+      console.log("Error => ", error);
+      return false;
+    }
+  };
+
   useEffect(() => {
     onGetPatients();
   }, []);
 
-  return { patients, changeStatus };
+  return { patients, changeStatus, _addPatient };
 }
